@@ -1,6 +1,6 @@
 version: "3.7"
 services:
-  daisyserver:
+  clickhouse:
     container_name: clickhouse
     image: yandex/clickhouse-server
     volumes:
@@ -15,6 +15,11 @@ services:
       nofile:
         soft: 262144
         hard: 262144
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "-q", "localhost:8123/ping"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
     deploy:
       resources:
         limits:

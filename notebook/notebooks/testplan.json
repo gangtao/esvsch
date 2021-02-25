@@ -1,0 +1,34 @@
+{
+    "runs": 100,
+    "targets": [
+      {
+        "name": "es1",
+        "type": "elasticsearch",
+        "config": {
+          "cluster": "host.docker.internal",
+          "indices": "syslog-2021-02-24,syslog-2021-02-25"
+        }
+      },
+      {
+        "name": "clickhouse1",
+        "type": "clickhouse",
+        "config": {
+          "cluster": "host.docker.internal"
+        }
+      }
+    ],
+    "testcases": [
+      [
+        "case1",
+        "query all",
+        [
+          {
+            "query": {
+              "match_all": {}
+            }
+          },
+          "SELECT * FROM syslog"
+        ]
+      ]
+    ]
+  }

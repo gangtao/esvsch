@@ -24,9 +24,9 @@ services:
       resources:
         limits:
           cpus: '4'
-          memory: 4096M
+          memory: 2048M
         reservations:
-          memory: 4096M
+          memory: 2048M
   
   tabixui:
     container_name: tabixui
@@ -38,7 +38,7 @@ services:
     ports:
       - "18080:80"
     depends_on:
-      - daisyserver
+      - clickhouse
     deploy:
       resources:
         limits:

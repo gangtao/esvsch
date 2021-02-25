@@ -21,6 +21,13 @@ services:
     ports:
       - 9200:9200
       - 9300:9300
+    deploy:
+      resources:
+        limits:
+          cpus: '4'
+          memory: 2048M
+        reservations:
+          memory: 2048M
 
   kibana:
     container_name: kibana

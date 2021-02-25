@@ -32,7 +32,7 @@
       ],
       [
         "case2",
-        "query all",
+        "match all",
         [
           {
             "query": {
@@ -42,6 +42,54 @@
             }
           },
           "SELECT raw FROM syslog WHERE hostname='for.org'"
+        ]
+      ],
+      [
+        "case3",
+        "multi match",
+        [
+          {
+            "query": {
+              "multi_match": {
+                "query": "up.com ahmadajmi",
+                "fields": [
+                  "hostname",
+                  "application"
+                ]
+              }
+            }
+          },
+          "SELECT raw FROM syslog WHERE hostname='for.org' OR application='ahmadajmi'"
+        ]
+      ],
+      [
+        "case4",
+        "term query",
+        [
+          {
+            "query": {
+              "term": {
+                "message": "pretty"
+              }
+            }
+          },
+          "SELECT raw FROM syslog WHERE lowerUTF8(raw) LIKE '%pretty%'"
+        ]
+      ],
+      [
+        "case5",
+        "range query",
+        [
+          {
+            "query": {
+              "range": {
+                "version": {
+                  "gte": 2
+                }
+              }
+            }
+          },
+          "SELECT raw FROM syslog WHERE version >= 2"
         ]
       ]
     ]

@@ -1,0 +1,43 @@
+[sources.in]
+  type = "generator"
+  format = "syslog"
+  interval = 0.01
+  count = 10
+
+[transforms.clone_message]
+  type = "add_fields"
+  inputs = ["in"]
+  fields.raw = "{{ message }}"
+
+[transforms.parser]
+  # General
+  type = "regex_parser"
+  inputs = ["clone_message"]
+  field = "message" # optional, default
+  patterns = ['^<(?P<priority>\d*)>(?P<version>\d) (?P<timestamp>\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z) (?P<hostname>\w+\.\w+) (?P<application>\w+) (?P<pid>\d+) (?P<mid>ID\d+) - (?P<message>.*)$']
+
+[transforms.coercer]
+  type = "coercer"
+  inputs = ["parser"]
+  types.timestamp = "timestamp"
+  types.version = "int"
+  types.priority = "int"
+
+[sinks.out_console]
+  # General
+  type = "console"
+  inputs = ["coercer"] 
+  target = "stdout" 
+
+  # Encoding
+  encoding.codec = "json" 
+
+  
+[sinks.out_clickhouse]
+  host = "http://host.docker.internal:8123"
+  inputs = ["coercer"]
+  table = "syslog"
+  type = "clickhouse"
+ 
+  encoding.only_fields = ["application", "hostname", "message", "mid", "pid", "priority", "raw", "timestamp", "version"]
+  encoding.timestamp_format = "unix"

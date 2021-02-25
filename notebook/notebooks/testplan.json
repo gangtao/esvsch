@@ -27,7 +27,21 @@
               "match_all": {}
             }
           },
-          "SELECT * FROM syslog"
+          "SELECT raw FROM syslog"
+        ]
+      ],
+      [
+        "case2",
+        "query all",
+        [
+          {
+            "query": {
+              "match": {
+                "hostname": "for.org"
+              }
+            }
+          },
+          "SELECT raw FROM syslog WHERE hostname='for.org'"
         ]
       ]
     ]

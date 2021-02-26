@@ -1,12 +1,12 @@
 {
-    "runs": 100,
+    "runs": 10,
     "targets": [
       {
         "name": "es1",
         "type": "elasticsearch",
         "config": {
           "cluster": "host.docker.internal",
-          "indices": "syslog-2021-02-24,syslog-2021-02-25"
+          "indices": "syslog-2021-02-24,syslog-2021-02-25,syslog-2021-02-26"
         }
       },
       {
@@ -27,7 +27,7 @@
               "match_all": {}
             }
           },
-          "SELECT raw FROM syslog"
+          "SELECT * FROM syslog"
         ]
       ],
       [
@@ -41,7 +41,7 @@
               }
             }
           },
-          "SELECT raw FROM syslog WHERE hostname='for.org'"
+          "SELECT * FROM syslog WHERE hostname='for.org'"
         ]
       ],
       [
@@ -59,7 +59,7 @@
               }
             }
           },
-          "SELECT raw FROM syslog WHERE hostname='for.org' OR application='ahmadajmi'"
+          "SELECT * FROM syslog WHERE hostname='for.org' OR application='ahmadajmi'"
         ]
       ],
       [
@@ -73,7 +73,7 @@
               }
             }
           },
-          "SELECT raw FROM syslog WHERE lowerUTF8(raw) LIKE '%pretty%'"
+          "SELECT * FROM syslog WHERE lowerUTF8(raw) LIKE '%pretty%'"
         ]
       ],
       [
@@ -89,7 +89,7 @@
               }
             }
           },
-          "SELECT raw FROM syslog WHERE version >= 2"
+          "SELECT * FROM syslog WHERE version >= 2"
         ]
       ],
       [
@@ -103,7 +103,7 @@
               }
             }
           },
-          "SELECT raw FROM syslog WHERE application is not NULL"
+          "SELECT * FROM syslog WHERE application is not NULL"
         ]
       ],
       [
@@ -122,7 +122,7 @@
               }
             }
           },
-          "SELECT raw FROM syslog WHERE match(hostname, 'up.*')"
+          "SELECT * FROM syslog WHERE match(hostname, 'up.*')"
         ]
       ]
     ]

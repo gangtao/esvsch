@@ -124,6 +124,38 @@
           },
           "SELECT * FROM syslog WHERE match(hostname, 'up.*')"
         ]
+      ],
+      [
+        "case8",
+        "count aggregation",
+        [
+            {
+                "aggs":{
+                   "version_count":{
+                      "value_count":{
+                         "field":"version"
+                      }
+                   }
+                }
+             },
+          "SELECT count(version) FROM syslog "
+        ]
+      ],
+      [
+        "case9",
+        "cardinality aggregation",
+        [
+            {
+                "aggs": {
+                  "my-agg-name": {
+                    "cardinality": {
+                      "field": "priority"
+                    }
+                  }
+                }
+              },
+          "SELECT count(distinct(priority)) FROM syslog "
+        ]
       ]
     ]
   }

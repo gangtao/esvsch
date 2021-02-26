@@ -15,4 +15,4 @@ push:
 	docker push ${FULLNAME}
 
 run:
-	docker run -p 8888:8888 -v $(PWD)/notebooks/:/opt/notebooks/ $(IMAGE_NAME) --NotebookApp.token=''
+	docker run -p 8888:8888 -v $(PWD)/notebooks/:/opt/notebooks/ $(IMAGE_NAME) --NotebookApp.token='' --NotebookApp.iopub_data_rate_limit=1.0e10

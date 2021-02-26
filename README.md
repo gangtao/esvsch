@@ -5,7 +5,7 @@ compare query performance elastic and clickhouse
 
 Start ES stack, in `elastic` directory, run `docker-compose up`.  [Kibana](http://localhost:5601) is running on port 5601.
 
-Start Clickhouse stack, in `clickhouse` directory,  run `docker-compose up`.  [TabixUI](http://localhost:18080) is running on port 18080.  run sql script init.sql to to create log table in clickhouse.
+Start Clickhouse stack, in `clickhouse` directory,  run `docker-compose up`.  [TabixUI](http://localhost:18080) is running on port 18080.  run sql script [init.sql](clickhouse/init.sql) to to create log table in clickhouse.
 
 Start vector container by running `make start` in `vector` directory to generate [syslog](https://stackify.com/syslog-101/) data, and exported into ES and Clickhouse stack.  The data ingestion pipeline is defined in file [vector.toml](vector/vector.toml)
 

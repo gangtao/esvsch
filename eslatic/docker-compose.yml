@@ -25,9 +25,9 @@ services:
       resources:
         limits:
           cpus: '4'
-          memory: 2048M
+          memory: 4096M
         reservations:
-          memory: 2048M
+          memory: 4096M
 
   kibana:
     container_name: kibana

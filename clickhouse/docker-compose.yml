@@ -24,9 +24,9 @@ services:
       resources:
         limits:
           cpus: '4'
-          memory: 2048M
+          memory: 4096M
         reservations:
-          memory: 2048M
+          memory: 4096M
   
   tabixui:
     container_name: tabixui

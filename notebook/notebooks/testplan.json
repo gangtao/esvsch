@@ -91,6 +91,39 @@
           },
           "SELECT raw FROM syslog WHERE version >= 2"
         ]
+      ],
+      [
+        "case6",
+        "exist query",
+        [
+          {
+            "query": {
+              "exists": {
+                "field": "application"
+              }
+            }
+          },
+          "SELECT raw FROM syslog WHERE application is not NULL"
+        ]
+      ],
+      [
+        "case7",
+        "regex query",
+        [
+          {
+            "query": {
+              "regexp": {
+                "message": {
+                  "value": "good*",
+                  "flags": "ALL",
+                  "max_determinized_states": 10000,
+                  "rewrite": "constant_score"
+                }
+              }
+            }
+          },
+          "SELECT raw FROM syslog WHERE match(hostname, 'up.*')"
+        ]
       ]
     ]
   }

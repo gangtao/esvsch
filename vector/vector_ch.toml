@@ -2,7 +2,7 @@
   type = "generator"
   format = "syslog"
   interval = 0.01
-  count = 10
+  count = 10000
 
 [transforms.clone_message]
   type = "add_fields"

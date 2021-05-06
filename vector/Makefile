@@ -12,7 +12,7 @@ start_es:
 		-p 28383:8383 \
 		timberio/vector:nightly-alpine
 
-start_es:
+start_ch:
 	docker run \
 		-v $(mkfile_path)/vector_ch.toml:/etc/vector/vector.toml:ro \
 		-p 28383:8383 \
